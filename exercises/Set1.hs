@@ -85,7 +85,7 @@ postagePrice :: Int -> Int
 postagePrice weight = if weight <= 5000
                       then if weight <= 500
                            then 250
-                           else 300 + (weight-500)
+                           else 300 + weight
                       else 6000
 
 ------------------------------------------------------------------------------
