@@ -91,7 +91,9 @@ isPalindrome str = if str == reverse str
 --   palindromify "abracacabra" ==> "acaca"
 
 palindromify :: String -> String
-palindromify s = todo
+palindromify s = if s == reverse s
+                 then s 
+                 else palindromify (drop 1 (take (length s - 1) s ))
 
 ------------------------------------------------------------------------------
 -- Ex 7: implement safe integer division, that is, a function that
@@ -104,8 +106,9 @@ palindromify s = todo
 --   safeDiv 4 0  ==> Nothing
 
 safeDiv :: Integer -> Integer -> Maybe Integer
-safeDiv x y = todo
-
+safeDiv x y = if y == 0
+              then Nothing
+              else Just (div x y )
 ------------------------------------------------------------------------------
 -- Ex 8: implement a function greet that greets a person given a first
 -- name and possibly a last name. The last name is represented as a
@@ -116,8 +119,8 @@ safeDiv x y = todo
 --   greet "John" (Just "Smith")  ==> "Hello, John Smith!"
 
 greet :: String -> Maybe String -> String
-greet first last = todo
-
+greet name (Just lname) = "Hello, " ++ name ++ " " ++ lname ++ "!"
+greet name Nothing      = "Hello, " ++ name ++ "!"
 ------------------------------------------------------------------------------
 -- Ex 9: safe list indexing. Define a function safeIndex so that
 --   safeIndex xs i
@@ -132,8 +135,7 @@ greet first last = todo
 --   safeIndex ["a","b","c"] (-1)  ==> Nothing
 
 safeIndex :: [a] -> Int -> Maybe a
-safeIndex xs i = todo
-
+safeIndex xs i = 
 ------------------------------------------------------------------------------
 -- Ex 10: another variant of safe division. This time you should use
 -- Either to return a string error message.
@@ -143,7 +145,10 @@ safeIndex xs i = todo
 --   eitherDiv 4 0   ==> Left "4/0"
 
 eitherDiv :: Integer -> Integer -> Either String Integer
-eitherDiv x y = todo
+eitherDiv x y = if y == 0
+                then Left (show x ++ "/" ++ show y)
+                else Right (div x y)
+
 
 ------------------------------------------------------------------------------
 -- Ex 11: implement the function addEithers, which combines two values of type
